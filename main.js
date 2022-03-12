@@ -7,7 +7,7 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 let resolution = 360 * 12; // points to draw per 360 degrees
-let turns = 5; // number of full rotations
+let turns = 25; // number of full rotations
 // spiral constant
 let a = (Math.sqrt(Math.pow(canvas.width, 2) + Math.pow(canvas.height, 2)) * 0.5) / (turns * Math.PI * 2);
 // let a = (Math.max(canvas.width, canvas.height) * 1.0) / (turns * Math.PI * 2);
@@ -61,7 +61,7 @@ function render(time) {
     });
     ctx.restore();
 
-    requestAnimationFrame(render);
+    // requestAnimationFrame(render);
 }
 
 requestAnimationFrame(render);
