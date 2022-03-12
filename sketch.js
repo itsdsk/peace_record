@@ -8,7 +8,7 @@ const {
 
 const settings = {
     dimensions: 'A4',
-    orientation: 'portrait',
+    orientation: 'landscape',
     pixelsPerInch: 300,
     scaleToView: true,
     units: 'cm',
@@ -47,17 +47,22 @@ const sketch = ({
             // sub wave
             // let subwave = Math.sin(i * 0.1) * (a * 1.0); // sunflower look
             {
+                // x = r × cos( θ )
+                // y = r × sin( θ )
+                let tmp_x = radius * Math.cos(angle + direction + randomStartRotation);
+                let tmp_switch = Math.abs(tmp_x * 2) % 2 < 1 ? 0.5 : 0;
+                let tmp_switch2 = (Math.sin(tmp_x * 4) + 1) / 4;
                 let c = 2 * Math.PI * radius; // circumference
-                let f = c / 40; // frequency
-                let subwave = Math.sin((angle * f)) * (a * 0.25); // sunflower look
-                subwave *= Math.pow(Math.sin(angle), 2); // CD shimmer effect
+                let f = c * 3; // frequency
+                let subwave = Math.sin((angle * f)) * (a * 0.5); // sunflower look
+                subwave *= Math.pow(Math.sin(angle + (Math.PI * tmp_switch2)), 2); // CD shimmer effect
                 // subwave *= Math.min(radius / (a * Math.PI * 5), 1.0); // no wave at center
                 subwave *= radius < (a * Math.PI * 3) ? 0 : 1;
                 radius += subwave;
             }
             // polar to cartesian
-            let x = radius * Math.sin(angle + direction);
-            let y = radius * Math.cos(angle + direction);
+            let x = radius * Math.sin(angle + direction + randomStartRotation);
+            let y = radius * Math.cos(angle + direction + randomStartRotation);
             // draw
             // ctx.lineTo(x, y);
             line.push([
