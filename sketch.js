@@ -8,6 +8,7 @@ const {
 
 const settings = {
     dimensions: 'A4',
+    // dimensions: [ 15, 15 ],
     orientation: 'landscape',
     pixelsPerInch: 300,
     scaleToView: true,
@@ -66,13 +67,15 @@ const sketch = ({
                     if (tmp_y < 0) {
                         // let tmp_switch = Math.abs(tmp_x * 2) % 2 < 1 ? 0.5 : 0;
                         // let tmp_switch2 = (Math.sin(tmp_x * 4) + 1) / 4;
-                        let line_width = width * 0.025;
+                        let line_width = width * 0.029;
                         tmp_x = Math.abs(tmp_x);
                         tmp_x = Math.max(tmp_x - line_width, 0);
                         let tmp_switch = Math.min(tmp_x, 0.5);
                         peace_switch = Math.min(peace_switch, tmp_switch);
                     }
-                })
+                });
+                let peace_ring = radius < width * 0.249 ? 0.5 : 0.0;
+                peace_switch = Math.min(peace_switch, peace_ring);
                 // let tmp_x = radius * Math.cos(angle + direction + randomStartRotation);
                 // // let tmp_switch = Math.abs(tmp_x * 2) % 2 < 1 ? 0.5 : 0;
                 // // let tmp_switch2 = (Math.sin(tmp_x * 4) + 1) / 4;
@@ -81,8 +84,8 @@ const sketch = ({
                 // tmp_x = Math.max(tmp_x - line_width, 0);
                 // let tmp_switch = Math.min(tmp_x, 0.5);
                 let c = 2 * Math.PI * radius; // circumference
-                let f = c * 3; // frequency
-                let subwave = Math.sin((angle * f)) * (a * 0.75); // sunflower look
+                let f = c * 4; // frequency
+                let subwave = Math.sin((angle * f)) * (a * 1.0); // sunflower look
                 subwave *= Math.pow(Math.sin(angle + (Math.PI * peace_switch)), 2); // CD shimmer effect
                 // subwave *= Math.min(radius / (a * Math.PI * 5), 1.0); // no wave at center
                 subwave *= radius < (a * Math.PI * 3) ? 0 : 1;
